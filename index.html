@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haegeun Choi | Portfolio</title>
+  <meta name="description" content="Portfolio of Haegeun Choi, Computer Engineering student at Hanbat National University and Undergraduate Researcher at EcoAI Lab.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    :root {
+      --paper: #f4efe3;
+      --paper-2: #fbf8f1;
+      --ink: #23302a;
+      --muted: #6b7568;
+      --line: #d9d1bf;
+      --grid: rgba(60, 90, 70, 0.07);
+      --forest: #2f6b4f;
+      --forest-soft: #dfeadf;
+      --water: #3d7ea6;
+      --water-soft: #dde9f0;
+      --pin: #c8553d;
+      --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Pretendard", -apple-system, "Segoe UI", sans-serif;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 48px 48px;
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--forest); text-decoration: none; }
+    .mono { font-family: var(--mono); }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(244, 239, 227, 0.9); backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 940px; margin: 0 auto; padding: 14px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { font-weight: 800; letter-spacing: 0.08em; color: var(--ink); font-size: 0.95rem; }
+    .nav-links { display: flex; gap: 22px; font-size: 0.9rem; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--forest); }
+
+    .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero map sheet */
+    .sheet {
+      margin: 48px 0 24px;
+      background: var(--paper-2);
+      border: 2px solid var(--ink);
+      outline: 1px solid var(--ink); outline-offset: 5px;
+      position: relative; overflow: hidden;
+    }
+    .sheet-map { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .sheet-map .c { fill: none; stroke: var(--forest); stroke-opacity: 0.22; stroke-width: 1.2; }
+    .sheet-map .c.idx { stroke-opacity: 0.4; stroke-width: 1.8; }
+    .sheet-map .river { fill: none; stroke: var(--water); stroke-opacity: 0.45; stroke-width: 3; stroke-linecap: round; }
+    .sheet-content { position: relative; padding: 56px 48px 44px; max-width: 620px; }
+    .coord {
+      font-family: var(--mono); font-size: 0.82rem; color: var(--pin); font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .coord svg { width: 14px; height: 18px; fill: var(--pin); }
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 3.8rem); font-weight: 900;
+      letter-spacing: 0.02em; line-height: 1.05; margin: 14px 0 12px;
+      text-transform: uppercase;
+    }
+    .tagline { font-size: clamp(1rem, 2.4vw, 1.15rem); color: var(--muted); }
+    .sheet-meta {
+      margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px 20px;
+      font-family: var(--mono); font-size: 0.82rem; color: var(--ink);
+    }
+    .sheet-meta span::before { content: "■ "; color: var(--forest); }
+    .north {
+      position: absolute; right: 28px; top: 24px; width: 44px; text-align: center;
+      font-family: var(--mono); font-weight: 600; font-size: 0.8rem;
+    }
+    .north svg { width: 26px; height: 38px; display: block; margin: 2px auto 0; }
+    .scale {
+      position: absolute; right: 28px; bottom: 22px;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--muted); text-align: right;
+    }
+    .scale-bar { display: flex; margin-top: 4px; border: 1px solid var(--ink); }
+    .scale-bar i { width: 28px; height: 6px; }
+    .scale-bar i:nth-child(odd) { background: var(--ink); }
+
+    /* Section headers like legend labels */
+    section { padding: 44px 0 8px; scroll-margin-top: 70px; }
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+    .sec-no { font-family: var(--mono); font-size: 0.8rem; color: var(--pin); font-weight: 600; }
+    h2 { font-size: 1.5rem; letter-spacing: -0.01em; }
+    .sec-head::after { content: ""; flex: 1; border-bottom: 1px dashed var(--line); transform: translateY(-6px); }
+
+    .box {
+      background: var(--paper-2); border: 1px solid var(--line); border-radius: 4px;
+      padding: 24px; box-shadow: 3px 3px 0 var(--line);
+    }
+    .box h3 { font-size: 1.1rem; }
+    .sub { color: var(--muted); font-size: 0.9rem; font-family: var(--mono); }
+
+    /* Route timeline */
+    .route { position: relative; padding-left: 36px; }
+    .route::before {
+      content: ""; position: absolute; left: 11px; top: 10px; bottom: 10px;
+      border-left: 3px dashed var(--pin); opacity: 0.55;
+    }
+    .stop { position: relative; margin-bottom: 18px; }
+    .stop:last-child { margin-bottom: 0; }
+    .stop::before {
+      content: ""; position: absolute; left: -33px; top: 22px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--paper-2); border: 4px solid var(--pin);
+    }
+    .stop.now::before { background: var(--pin); box-shadow: 0 0 0 5px rgba(200, 85, 61, 0.18); }
+    .stop-year { font-family: var(--mono); font-size: 0.78rem; color: var(--pin); font-weight: 600; letter-spacing: 0.05em; }
+    .stop ul { list-style: none; margin-top: 10px; }
+    .stop li { padding-left: 18px; position: relative; margin: 3px 0; }
+    .stop li::before { content: "◦"; position: absolute; left: 2px; color: var(--forest); font-weight: 700; }
+    .papers { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+    .papers-cap { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+    .paper { padding: 10px 14px; margin-top: 8px; border-left: 3px solid var(--water); background: var(--water-soft); border-radius: 0 4px 4px 0; }
+    .paper-title { font-weight: 600; font-size: 0.95rem; line-height: 1.5; }
+    .paper-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    .awards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .award { display: flex; gap: 16px; align-items: center; }
+    .flag { flex-shrink: 0; width: 40px; height: 48px; }
+
+    /* Legend */
+    .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .legend-list { list-style: none; margin-top: 14px; }
+    .legend-list li { display: flex; align-items: center; gap: 12px; margin: 8px 0; font-size: 0.95rem; }
+    .sym { flex-shrink: 0; width: 18px; height: 18px; }
+    .sym.area { background: var(--forest-soft); border: 2px solid var(--forest); }
+    .sym.water { height: 4px; background: var(--water); border-radius: 2px; }
+    .legend-cap { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+
+    .contact { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 11px 18px; border: 2px solid var(--ink); border-radius: 4px;
+      background: var(--paper-2); color: var(--ink); font-weight: 600; font-size: 0.95rem;
+      box-shadow: 3px 3px 0 var(--ink); transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+    .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    footer {
+      margin-top: 64px; padding: 28px 20px; text-align: center;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .wrap { padding: 0 16px; }
+      .sheet { margin-top: 28px; }
+      .sheet-content { padding: 40px 22px 80px; }
+      .coord { padding-right: 44px; }
+      .north { right: 16px; top: 14px; }
+      .scale { right: 16px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">HAEGEUN CHOI</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#journey">Journey</a>
+        <a href="#awards">Awards</a>
+        <a href="#legend">Interests</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <header class="sheet">
+      <svg class="sheet-map" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g transform="translate(700 180)">
+          <path class="c" d="M-40,0 C-40,-30 -10,-45 20,-38 C48,-30 55,0 45,25 C35,45 5,50 -15,40 C-32,32 -40,18 -40,0 Z"/>
+          <path class="c" d="M-80,0 C-82,-55 -30,-85 25,-78 C85,-68 100,-10 90,35 C78,80 25,95 -20,85 C-60,75 -78,40 -80,0 Z"/>
+          <path class="c idx" d="M-125,0 C-128,-80 -50,-125 30,-118 C120,-108 145,-25 135,45 C120,115 45,140 -25,130 C-90,120 -122,65 -125,0 Z"/>
+          <path class="c" d="M-170,5 C-175,-105 -70,-165 35,-158 C155,-150 190,-40 180,55 C165,150 65,185 -30,175 C-120,165 -165,90 -170,5 Z"/>
+          <path class="c" d="M-215,10 C-222,-130 -90,-205 40,-198 C190,-192 235,-55 225,65 C210,185 85,230 -35,220 C-150,210 -208,115 -215,10 Z"/>
+          <path class="c idx" d="M-260,15 C-268,-155 -110,-245 45,-238 C225,-232 280,-70 270,75 C255,220 105,275 -40,265 C-180,255 -252,140 -260,15 Z"/>
+        </g>
+        <path class="river" d="M-20,380 C120,350 180,400 300,370 C420,340 470,390 560,410 C620,423 660,430 700,440"/>
+        <path class="c" d="M-20,330 C110,300 200,340 320,315 C440,290 500,330 600,345"/>
+      </svg>
+
+      <div class="north" aria-hidden="true">N
+        <svg viewBox="0 0 26 38"><path d="M13 0 L24 36 L13 28 L2 36 Z" fill="none" stroke="#23302a" stroke-width="1.6"/><path d="M13 0 L13 28 L2 36 Z" fill="#23302a"/></svg>
+      </div>
+
+      <div class="sheet-content">
+        <span class="coord">
+          <svg viewBox="0 0 14 18"><path d="M7 0a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 7 4.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          36.35°N 127.30°E · DAEJEON, KOREA
+        </span>
+        <h1>Haegeun Choi</h1>
+        <p class="tagline">From a student who loved geography to a developer who works with spatial data.</p>
+        <div class="sheet-meta">
+          <span>Computer Engineering</span>
+          <span>Hanbat National Univ.</span>
+          <span>EcoAI Lab</span>
+        </div>
+      </div>
+
+      <div class="scale" aria-hidden="true">SCALE 1 : 2026
+        <div class="scale-bar"><i></i><i></i><i></i><i></i></div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="sec-head"><span class="sec-no">01</span><h2>About Me</h2></div>
+      <div class="box">
+        <p>I'm a sophomore majoring in <strong>Computer Engineering</strong> at Hanbat National University.</p>
+        <p style="margin-top:10px">My interest in geography, which led me to the Korea Geography Olympiad in high school, has grown into an interest in <strong>Geographic Information Systems (GIS)</strong> and software that works with spatial data. I'm currently building my research foundation as an <strong>Undergraduate Researcher at EcoAI Lab</strong>.</p>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="sec-head"><span class="sec-no">02</span><h2>Journey</h2></div>
+      <div class="route">
+        <div class="stop now">
+          <div class="box">
+            <div class="stop-year">NOW</div>
+            <h3>EcoAI Lab · Undergraduate Researcher</h3>
+            <p class="sub">Hanbat National University</p>
+            <ul>
+              <li>Participating in weekly lab seminars and meetings</li>
+              <li>Presented 2 paper reviews</li>
+            </ul>
+            <div class="papers">
+              <div class="papers-cap">Paper Reviews</div>
+              <div class="paper">
+                <p class="paper-title">An Empirical UX Study of an AI Control Model for Audience-Interactive Smartphone Performance Design</p>
+                <p class="paper-meta">J. Yoo, J. Yang · Smart Media Journal · 2026</p>
+              </div>
+              <div class="paper">
+                <p class="paper-title">A Study on a Real-Time Direction Change of Microphone Sound According to the Location of Performers in Stage Performance</p>
+                <p class="paper-meta">H. Cho, J. Kim · Journal of Digital Contents Society · 2021</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stop now">
+          <div class="box">
+            <div class="stop-year">NOW</div>
+            <h3>B.S. in Computer Engineering · Sophomore</h3>
+            <p class="sub">Hanbat National University</p>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="box">
+            <div class="stop-year">2022</div>
+            <h3>Korea Geography Olympiad</h3>
+            <p class="sub">Where my interest in geography began</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="awards">
+      <div class="sec-head"><span class="sec-no">03</span><h2>Awards</h2></div>
+      <div class="awards">
+        <div class="box award">
+          <svg class="flag" viewBox="0 0 40 48" aria-hidden="true"><line x1="6" y1="2" x2="6" y2="46" stroke="#23302a" stroke-width="2.5"/><path d="M7 4 H36 L30 13 L36 22 H7 Z" fill="#b5713f"/></svg>
+          <div>
+            <h3>Korea Geography Olympiad</h3>
+            <p class="sub">Bronze Prize · National Round · 2022</p>
+          </div>
+        </div>
+        <div class="box award">
+          <svg class="flag" viewBox="0 0 40 48" aria-hidden="true"><line x1="6" y1="2" x2="6" y2="46" stroke="#23302a" stroke-width="2.5"/><path d="M7 4 H36 L30 13 L36 22 H7 Z" fill="#d4a52a"/></svg>
+          <div>
+            <h3>Korea Geography Olympiad</h3>
+            <p class="sub">Gold Prize · Daejeon Regional Round · 2022</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="legend">
+      <div class="sec-head"><span class="sec-no">04</span><h2>Legend</h2></div>
+      <div class="legend">
+        <div class="box">
+          <div class="legend-cap">Interests</div>
+          <ul class="legend-list">
+            <li><span class="sym area"></span>Geographic Information Systems (GIS)</li>
+            <li><span class="sym area"></span>Location-based / Address APIs</li>
+            <li><span class="sym area"></span>Software Development with Spatial Data</li>
+            <li><span class="sym area"></span>Algorithms &amp; Data Structures</li>
+            <li><span class="sym area"></span>Database Management Systems</li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="legend-cap">Currently Learning</div>
+          <ul class="legend-list">
+            <li><span class="sym water"></span>Algorithms &amp; Data Structures</li>
+            <li><span class="sym water"></span>Engineering Mathematics</li>
+            <li><span class="sym water"></span>Unity &amp; 3D Environment Development</li>
+            <li><span class="sym water"></span>Microprocessors &amp; Hardware Interfaces</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sec-head"><span class="sec-no">05</span><h2>Contact</h2></div>
+      <div class="contact">
+        <a class="btn" href="mailto:20232040@edu.hanbat.ac.kr">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z"/></svg>
+          Email
+        </a>
+        <a class="btn" href="https://github.com/geun179" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.690-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>© 2026 Haegeun Choi · Mapped with GitHub Pages</footer>
+
+</body>
+</html>
