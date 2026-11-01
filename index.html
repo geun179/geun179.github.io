@@ -135,6 +135,18 @@
     .paper { padding: 10px 14px; margin-top: 8px; border-left: 3px solid var(--water); background: var(--water-soft); border-radius: 0 4px 4px 0; }
     .paper-title { font-weight: 600; font-size: 0.95rem; line-height: 1.5; }
     .paper-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+    .papers ul { list-style: none; }
+    .papers li { padding-left: 18px; position: relative; margin: 3px 0; }
+    .papers li::before { content: "◦"; position: absolute; left: 2px; color: var(--forest); font-weight: 700; }
+    .role { font-size: 0.9rem; color: var(--muted); margin-bottom: 4px; }
+    .kv { display: grid; grid-template-columns: 90px 1fr; gap: 8px 16px; font-size: 0.95rem; }
+    .kv dt { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--forest); padding-top: 2px; }
+    .kv dd { margin: 0; }
+    .kv dd ul { margin-top: 4px; }
+    .sub-cap { margin-top: 20px; }
+    @media (max-width: 600px) { .kv { grid-template-columns: 1fr; gap: 2px; } .kv dd { margin-bottom: 10px; } }
+    .paper-link { display: inline-block; margin-top: 6px; margin-right: 12px; font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--water); }
+    .paper.authored { border-left-color: var(--pin); background: #f6e4dc; }
 
     .awards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
     .award { display: flex; gap: 16px; align-items: center; }
@@ -251,24 +263,52 @@
       <div class="route">
         <div class="stop now">
           <div class="box">
-            <div class="stop-year">NOW</div>
+            <div class="stop-year">SEP 2026 – PRESENT</div>
             <h3>EcoAI Lab · Undergraduate Researcher</h3>
             <p class="sub">Hanbat National University</p>
-            <ul>
-              <li>Participating in weekly lab seminars and meetings</li>
-              <li>Presented 2 paper reviews</li>
-            </ul>
+
             <div class="papers">
-              <div class="papers-cap">Paper Reviews</div>
+              <div class="papers-cap">Lab Seminar</div>
+              <dl class="kv">
+                <!-- 세미나 주제를 공개해도 되면 아래 두 줄의 주석 표시를 지우세요 -->
+                <!-- <dt>Topic</dt><dd>AI-based Stage Performance Control</dd> -->
+                <dt>Period</dt><dd>Sep 2026 – Present (weekly)</dd>
+                <dt>My Role</dt>
+                <dd>Paper review presenter
+                  <ul>
+                    <li>Reviewed 2 research papers related to the seminar topic</li>
+                    <li>Presented each review to lab members and answered questions in Q&amp;A sessions</li>
+                  </ul>
+                </dd>
+              </dl>
+
+              <div class="papers-cap sub-cap">Reviewed Papers (not authored)</div>
               <div class="paper">
                 <p class="paper-title">An Empirical UX Study of an AI Control Model for Audience-Interactive Smartphone Performance Design</p>
                 <p class="paper-meta">J. Yoo, J. Yang · Smart Media Journal · 2026</p>
+                <!-- <p class="paper-meta">Presented: 2026.MM.DD</p> -->
+                <a class="paper-link" href="https://doi.org/10.30693/SMJ.2026.15.1.90" target="_blank" rel="noopener">View paper ↗</a>
+                <!-- <a class="paper-link" href="발표자료 링크" target="_blank" rel="noopener">My slides ↗</a> -->
               </div>
               <div class="paper">
                 <p class="paper-title">A Study on a Real-Time Direction Change of Microphone Sound According to the Location of Performers in Stage Performance</p>
-                <p class="paper-meta">H. Cho, J. Kim · Journal of Digital Contents Society · 2021</p>
+                <p class="paper-meta">H. Jo, J. Kim · Journal of Digital Contents Society · 2021</p>
+                <!-- <p class="paper-meta">Presented: 2026.MM.DD</p> -->
+                <a class="paper-link" href="https://doi.org/10.9728/dcs.2021.22.3.429" target="_blank" rel="noopener">View paper ↗</a>
+                <!-- <a class="paper-link" href="발표자료 링크" target="_blank" rel="noopener">My slides ↗</a> -->
               </div>
             </div>
+
+            <!-- 직접 저자로 참여한 연구가 생기면 아래 주석을 풀어서 사용하세요
+            <div class="papers">
+              <div class="papers-cap">Authored Research</div>
+              <div class="paper authored">
+                <p class="paper-title">논문 제목</p>
+                <p class="paper-meta">저자 · 학술지/학회 · 연도 · 내 역할</p>
+                <a class="paper-link" href="논문 링크" target="_blank" rel="noopener">View paper ↗</a>
+              </div>
+            </div>
+            -->
           </div>
         </div>
         <div class="stop now">
